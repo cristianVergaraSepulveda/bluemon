@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<window id="window" title="ZK Flash Instrument" style="width:100%" border="normal"> 
+<zscript>
+int instrumentValue=0;
+int instrumentMax = 100;
+String showGlasBorder="false";
+
+public void changeValue(aValue) {
+     instrumentValue = aValue;
+     slider.setCurpos( instrumentValue );
+     drawGlas();
+}
+public void setInstrumentBorder() {
+     showGlasBorder= (instrumentCheckbox.isChecked()).toString();
+     drawGlas();
+}
+public drawGlas() {
+     String url = "Glas.swf?currentValue="+instrumentValue+"&amp;border="+showGlasBorder+"&amp;min=0&amp;lo=10&amp;li=20&amp;hi=80&amp;ho=90&amp;max=100"; 
+     myInstrument.src = url; 
+}
+
+void zoom(Slider slider) {
+	changeValue( event.getPos() );
+}
+</zscript>
+
+<hbox>
+<flash id="myInstrument" src="Glas.swf?currentValue=0&amp;min=0&amp;lo=10&amp;li=20&amp;hi=80&amp;ho=90&amp;max=100" width="128" height="128" /> 
+</hbox>
+<vbox>
+<label value="Fill glas:"/>
+<slider id="slider" onScroll="zoom(slider)"/>
+<checkbox id="instrumentCheckbox" label="Show Borders on Glas" onCheck="setInstrumentBorder()" />
+</vbox>
+</window> 

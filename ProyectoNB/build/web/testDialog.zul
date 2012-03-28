@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+<label id="IdSensor" value ="${1}" visible="false" /> 
+  <label id="IdMicro" value ="${1}" visible="false" />
+                                  <div apply="WEB.TreeNode.GridComposer"> 
+                                 <grid width="300px" mold="paging" pageSize="10" id="datos" 
+                        rowRenderer="MyRowRenderer" emptyMessage="Nothing in Inbox." >
+                        <columns>
+                            <column label="Dato"/>
+                            <column label="Registro"/>
+                        </columns>
+                       </grid>
+                           <timer id="timer" delay="5000" repeats="true" />  
+                           
+                           </div>
+<!-- <button label="updated data and refresh" id="refreshBtn" /> -->
+</zk>

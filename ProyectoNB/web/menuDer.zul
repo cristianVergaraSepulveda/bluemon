@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+<vbox>
+<button label="Graficos" onClick="add1()" onCheck="txb.value = self.selectedItem.label" >
+    <!-- <tab label="Tab 1" closable="true" /> -->
+ <!--   <attribute value=" agragar tabs" name="onClick"><![CDATA[
+       tabs.appendChild(new Tab("tab 2"));
+Tabpanel tabpanel = new Tabpanel();
+tabpanel.appendChild(new Label("new tabs"));
+tabpanels.appendChild(tabpanel);
+    ]]></attribute> -->
+    </button>
+    <button label="Reportes" onClick="add2()" onCheck="txb.value = self.selectedItem.label" ></button>
+    <button label="Otros" onClick="add3()" ></button>
+<textbox id="txb" value="this is a tab" width="150px" visible="false" />
+</vbox>  
+    <zscript><![CDATA[ //@DECLARATION 
+    import WEB.Reportes;
+void add1() {
+Tab tab1 = new Tab("Graficos");
+tab1.setClosable(true);
+if(tabs.getChildren().equals(tab1)){
+alert("ya existe los graficos");
+}
+tabs.appendChild(tab1);
+Tabpanel tabpanel = new Tabpanel();
+tabpanel.appendChild(new Label("la cosa nostra"));
+
+//codigo
+
+tabpanels.appendChild(tabpanel);
+}
+
+void add2() {
+Tab tab2 = new Tab("Reportes");    //txb.getValue()
+tab2.setClosable(true);
+tabs.appendChild(tab2);
+Tabpanel tabpanel = new Tabpanel();
+tabpanel.appendChild(new Label("la cosa nostra2"));
+
+Window rwin = new Window();
+Reportes rep = new Reportes();
+rwin = rep.getReportes();
+tabpanel.appendChild(rwin);
+
+tabpanels.appendChild(tabpanel);
+}//fin reportes
+
+void add3() {
+Tab tab3 = new Tab("Otros");
+tab3.setClosable(true);
+tabs.appendChild(tab3);
+Tabpanel tabpanel = new Tabpanel();
+tabpanel.appendChild(new Label("la cosa nostra3"));
+
+//codigo
+
+tabpanels.appendChild(tabpanel);
+}
+]]></zscript>
+    <label value="  " style="color:#FF0000; font-size:20px" />
+    <include src="pizarraAlarm.zul"/>
+</zk>

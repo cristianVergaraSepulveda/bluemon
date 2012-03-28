@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+<hbox>
+    <radiogroup id="sv1" onCheck="txb.value = self.selectedItem.label" />
+    <grid width="100px"  >
+    <columns>   
+        <column label="Menu Admin"  />    
+    </columns>
+    <rows>
+        <row >
+            <radio id="ra1" name="ra1" label="Admin usuarios" radiogroup="sv1"  />
+        </row>
+        <row>
+             <radio id="ra2" label="Admin variables" radiogroup="sv1" />
+        </row>
+        <row>
+             <radio id="ra3" label="Admin Estaciones" radiogroup="sv1" />
+        </row>
+        </rows>
+    </grid>    
+<button label="Accion" onClick="add()" >
+    <!-- <tab label="Tab 1" closable="true" /> -->
+ <!--   <attribute value=" agragar tabs" name="onClick"><![CDATA[
+       tabs.appendChild(new Tab("tab 2"));
+Tabpanel tabpanel = new Tabpanel();
+tabpanel.appendChild(new Label("new tabs"));
+tabpanels.appendChild(tabpanel);
+    ]]></attribute> -->
+    </button>
+<textbox id="txb" value="this is a tab" width="150px" visible="false" />
+</hbox>
+    
+    <zscript><![CDATA[
+    import WEB.Administracion;
+    //@DECLARATION 
+    
+void add() {
+
+if(ra3.checked == true){
+alert(" Opcion aun no Implementada");
+
+}
+if(ra2.isChecked()){
+//alert("opcion Adminsitracion vriables ");
+
+Tab tab = new Tab(txb.getValue());
+tab.setClosable(true);
+tabs.appendChild(tab);
+Tabpanel tabpanel = new Tabpanel();
+tabpanel.appendChild(new Label("Administracion variable "));
+// insertar win con codigo
+Administracion adm = new Administracion();
+
+Window twin = new Window();
+//twin.appendChild(new Label("la cosa nostra2"));
+twin = adm.getListVariable();
+tabpanel.appendChild(twin);
+
+tabpanels.appendChild(tabpanel);
+}
+
+if(ra1.isChecked()){
+Tab tab = new Tab(txb.getValue());
+tab.setClosable(true);
+tabs.appendChild(tab);
+Tabpanel tabpanel = new Tabpanel();
+tabpanel.appendChild(new Label("solo label "));
+
+Administracion adm = new Administracion();
+
+Window twin = new Window();
+//twin.appendChild(new Label("la cosa nostra2"));
+twin = adm.getListUser();
+tabpanel.appendChild(twin);
+tabpanels.appendChild(tabpanel);
+
+}
+
+
+}
+]]></zscript>
+    <label value="menu para crear reportes y  visualizar a traves de tabs que se desplegaran
+  en la pantalla de en medio" style="color:#FF0000; font-size:20px" />
+   <include src="pizarraAlarm.zul"/>
+</zk>

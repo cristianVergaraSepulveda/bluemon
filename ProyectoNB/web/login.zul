@@ -1,0 +1,117 @@
+<window id="startWindow" border="none" width="100%" height="100%"
+		>   <!--use="de.forsthaus.webui.InitApplicationCtrl"-->
+        <borderlayout width="100%" height="100%">
+            <north id="bl_north" border="none" size="25%"
+                      style="background-color: #2BB405" flex="true">
+                <div width="700px" height="100px"
+                            style="background-color: #FFFFFF padding-top: 10px; padding-left: 10px">
+                            <div width="600px" align="left"
+                            style="background-color: #FFFFFF; padding: 10px">
+                                <vlayout>
+                                    <custom-attributes org.zkoss.zul.image.preload="true" />
+                                    <image src="images/logo.png" />
+				</vlayout>
+                                <separator />
+				<separator />
+				<hbox>
+				
+				</hbox>
+			</div>                        
+                <div width="100%" align="right"
+		style="background-color: #31B404; padding: 2px;  ">
+		<separator bar="true" />
+ <vlayout xmlns:c="client">
+    <button id="initBtn" label="Login">
+        <attribute name="onClick"><![CDATA[
+            if (!loginWin.isVisible())
+                loginWin.setVisible(true);
+            loginWin.doHighlighted();
+        ]]></attribute>
+    </button>
+    <window id="loginWin" title="Login with zk/zk" width="300px" visible="false" minimizable="true" onOK="loginCheck()" border='normal'>
+        <attribute name="onMinimize"><![CDATA[
+        if (self.isMinimized())
+            Clients.evalJavaScript("loginSucess(" + event.getLeft().replace("px","") + "," + event.getTop().replace("px","") + ")");
+        ]]></attribute>
+        <style>
+        div.minimize {
+            border: 1px solid #79858E;
+            background: #D3E1EC;
+            position: absolute;
+            opacity: 0.8;       
+        }
+        div.loginGrid { 
+            border: none;
+        }
+        td.loginCtl {
+            text-align: center;
+        }
+        td.loginCtl .z-label {
+            color: red;         
+            font-style: italic;
+        }
+        </style>
+        <grid sclass="loginGrid">
+            <columns>
+                <column width="100px" />
+            </columns>
+            <rows>
+                <row>User Name : <textbox id="name" value="zk" c:onFocus="this.select()" /></row>
+                <row>Password : <textbox id="pwd" type="password" c:onFocus="this.select()"/></row>
+                <row><cell sclass="loginCtl" colspan="2"><vlayout>
+                    <button label="Submit" onClick="loginCheck()" width="100px"/>
+                    <label id="mesg" />
+                </vlayout></cell></row>
+            </rows>
+        </grid>
+        <zscript><![CDATA[
+        
+        import DAO.LoginDAO;
+        import Modelo.Login;
+        List allLogin = new LoginDAO().getLogin();
+    
+        void loginCheck () {
+            for(int i=0; i<allLogin.size(); i++ ){
+            Login login = new Login();
+            login = allLogin.get(i);
+            
+                if ((name.getValue().equals(login.getLogin()) && pwd.getValue().equals(login.getPassword()))) {
+                    mesg.setValue("");
+                    Clients.evalJavaScript("zk.Widget.$('$loginWin').setMinimized(true)");
+                    initBtn.getParent().appendChild(new Label("Login Correcto Bienvenido"));
+                    Executions.sendRedirect("index.zul");
+                } else {
+                    mesg.setValue("Nombre Usuario o Password invalida");
+                    Clients.evalJavaScript("loginFaild()");
+                };
+
+            }//fin for 
+            if ((name.getValue().equals("admin") && pwd.getValue().equals("admin"))) {
+                mesg.setValue("");
+                Clients.evalJavaScript("zk.Widget.$('$loginWin').setMinimized(true)");
+                initBtn.getParent().appendChild(new Label("Login Correcto Bienvenido"));
+                Executions.sendRedirect("index.zul");
+            } else {
+                mesg.setValue("Nombre Usuario o Password invalida");
+                Clients.evalJavaScript("loginFaild()");
+            }; //fin if 
+        }
+        ]]></zscript>
+    </window>
+    <script type="text/javascript" src="/js/login_effect/jquery-ui-1.8.6.custom.min.js" />
+    <script type="text/javascript" src="/js/login_effect/customized_effect.js" />    
+</vlayout>
+			</div>
+		</div>
+	</north>
+	<center id="bl_center" border="1" 
+		style="background-color: ##FFFFFF" flex="true" >
+                    <hbox ><label value="Legoocom Ltda. reconociendo el carácter de límites infranqueables que los derechos fundamentales poseen respecto de las facultades que la ley le reconoce al empleador, en especial respecto del derecho a la intimidad, vida privada y honra de los trabajadores, informa que Ud. se encuentra en un espacio donde sólo puede encontrarse si se ENCUENTRA AUTORIZADO PARA ELLO. De no ser así, DEBE SALIR EN FORMA INMEDIATA DE ESTE ESPACIO, y bajo ningún punto podrá divulgar, informar, transmitir, o capturar, por cualquier medio, la información que haya tenido a la vista, o acceso, resultando responsable de todos los perjuicios que se generen de sus actos. Si Ud. se encuentra autorizado, sólo podrá actuar en el marco de la gestión en Recursos Humanos, y bajo ningún punto de vista podrá vulnerar las facultades que la ley le reconoce al empleador, en especial respecto del derecho a la intimidad, vida privada y honra de los trabajadores.
+" /></hbox>
+                    </center>
+	<south id="bl_south" border="none" size="15%"
+		style="background-color: #31B404" height="32px" />
+	</borderlayout>
+
+</window>
+

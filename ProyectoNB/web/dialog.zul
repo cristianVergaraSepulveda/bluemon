@@ -1,0 +1,149 @@
+<zk id="dialog">    
+<style><![CDATA[
+		.dialog .msg .z-label {
+		  font-weight: bold;
+		  font-style: italic;
+		  color: #008BB6;
+		}
+		.dialog .z-borderlayout,
+		.dialog .z-north, .dialog .z-south,
+		.dialog .z-east,  .dialog .z-west,
+		.dialog .z-center, .dialog .z-panel-children ,
+		.dialog .z-panel-noheader div.z-toolbar {
+			border: 0 none;
+			background:transparent;
+		}
+		.dialog .viewer .z-label {
+			font-weight: bold;
+		}
+		.dialog .viewer pre, .dialog .viewer .content {
+			font-weight: normal;
+			padding-left:20px;
+			margin: 0;
+		}
+	]]>
+</style>
+<panel id="panel" width="590px" height="500px" border="normal" sclass="dialog">
+    <toolbar sclass="msg">Informacion  por Sensor (Basado en los 100 ultimos datos)</toolbar>
+        <panelchildren>
+            <borderlayout>
+                <west size="100px">
+                    <borderlayout height="100px" width="100%">
+                        <north > 
+                            <vlayout>
+                                 Estado de ${arg.nombre} - ${arg.micro}
+                                 <label id="IdSensor" value ="${arg.sensor}" visible="false" /> 
+                                 <label id="IdMicro" value ="${arg.micro}" visible="false" />
+                            
+                            <custom-attributes org.zkoss.zul.image.preload="true" />
+                            <image src="/images/redsiren.gif" />
+                            </vlayout>
+                        </north>
+			<south  height="200px">
+    <grid height="220px" id="mygrid">
+        <columns>
+            <column label="Alarm"/>
+            <column label="Time"/>
+        </columns>
+    </grid>                          
+
+<zscript><![CDATA[
+
+    import DAO.EstacionDAO;
+    import Modelo.Dato;
+    import Modelo.Registro;
+    import WEB.MyRowRenderer;
+    //int a = Integer.parseInt(IdSensor.getValue());
+     List allDato = new EstacionDAO().getDatoAlarmaxIdSensor(Integer.parseInt(IdSensor.getValue()));
+    List AllRegistro = new EstacionDAO().getRegistroAlarmaxIdSensor(Integer.parseInt(IdSensor.getValue()));
+    String[][] model = new String[allDato.size()][2]; 
+        for(int j=0; j < model.length; ++j) {
+            Dato dato = new Dato();           
+            dato = (Dato) allDato.get(j);
+            Registro registro = new Registro();
+            registro = (Registro) AllRegistro.get(j);
+            model[j][0] = ""+dato.getDato();
+            model[j][1] = registro.getFecha()+" "+registro.getHora(); 
+        } 
+         ListModel strset = new SimpleListModel(model);  
+         mygrid.setModel(strset); 
+        mygrid.setRowRenderer(new MyRowRenderer()); 
+         ]]></zscript>  
+			</south>
+                    </borderlayout>
+		</west>
+		<east width="460px" border="2" flex="true">
+                    <borderlayout height="370px">
+			<center flex="true">
+                        <vlayout id="tables" sclass="viewer" style="overflow:auto;">
+                             <div apply="WEB.TreeNode.GridComposer"> 
+                                 <grid width="300px" mold="paging" pageSize="10" id="datos" 
+                        rowRenderer="WEB.MyRowRenderer" emptyMessage="Nothing in Inbox." >
+                        <columns>
+                            <column label="Dato"/>
+                            <column label="Registro"/>
+                        </columns>
+                       </grid>
+                           <timer id="timer" delay="5000" repeats="true" />  
+                           
+                           </div>
+                           
+                   
+                </vlayout>
+            </center>
+        <south splittable="true" height="300px" >
+            <div>
+                <chart id="xyarea" title="Grafico Datos vs Tiempo" width="450" height="250"
+                type="time_series"  threeD="false" fgAlpha="128"  >
+                <zscript><![CDATA[
+                import java.text.SimpleDateFormat;
+                //import Modelo.Registro;
+                //import DAO.EstacionDAO;
+                //import Modelo.Dato;
+                XYModel xymodel = new SimpleXYModel();
+                public Date time(int year, int month, int day, int hour, int minute, int second) {
+                final java.util.Calendar calendar = java.util.Calendar.getInstance(TimeZone.getTimeZone("Chile/Continental"));
+                calendar.set(year, month-1, day, hour, minute, second);
+                final Date result = calendar.getTime();
+                return result;
+                }
+                //allDato
+                XYModel datemodel = new SimpleXYModel();    
+                  List allDato = new EstacionDAO().getDatoXidSensor2(Integer.parseInt(IdSensor.getValue()));        //Integer.parseInt(IdSensor.getValue())
+                    for (int i = 0; i < 10; i++ ){
+                        Dato dato = new Dato();
+                        dato = allDato.get(i);
+                        Registro Reg = new Registro(); 
+                        Reg = new EstacionDAO().getRegistroDato2(dato.getIdDato());                 //dato.getIdDato()
+                    ///////////////////////////
+                    Date Fec = Reg.getFecha();
+                    Date Hor = Reg.getHora();
+                    new SimpleDateFormat();
+                    SimpleDateFormat anho = new SimpleDateFormat("yyyy");
+                    SimpleDateFormat mes = new SimpleDateFormat("MM");
+                    SimpleDateFormat dia = new SimpleDateFormat("dd");
+                    SimpleDateFormat hora = new SimpleDateFormat("HH");
+                    SimpleDateFormat min = new SimpleDateFormat("mm");
+                    SimpleDateFormat seg = new SimpleDateFormat("ss");
+                    //int algo= Integer.parseInt((String)hora.format(Time));
+                    int Dia = Integer.parseInt((String)dia.format(Fec));
+                    int Mes = Integer.parseInt((String)mes.format(Fec))-1;
+                    int year = Integer.parseInt((String)anho.format(Fec));
+                    int lHor = Integer.parseInt((String)hora.format(Hor));
+                    int Min = Integer.parseInt((String)min.format(Hor));
+                    int Seg = Integer.parseInt((String)seg.format(Hor));
+                    /////////////////////////////                    
+                    datemodel.addValue("temperatura", new Long(time(year, Mes, Dia, lHor, Min, Seg).getTime()),new Integer(dato.getDato()));
+                }                
+                //datemodel.addValue("temperatura", new Long(time(2012, 1, 18, 1, 10, 15).getTime()), new Integer(50));                       
+                xyarea.setModel(datemodel);
+                ]]></zscript>
+                </chart>
+            </div>
+        </south>
+    </borderlayout>
+   </east>
+  </borderlayout>
+  </panelchildren>
+</panel>
+</zk>

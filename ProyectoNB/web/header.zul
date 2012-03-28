@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+        <vlayout>
+            <custom-attributes org.zkoss.zul.image.preload="true" />
+            <image src="/images/logo.png" />
+            
+	</vlayout>
+</zk>

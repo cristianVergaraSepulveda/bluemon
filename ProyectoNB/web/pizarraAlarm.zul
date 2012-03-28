@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+<panel id="panel" title="Alarmas" framable="true" width="350px" height="250px"
+        maximizable="true" minimizable="true" border="normal" collapsible="true"
+        onClose='alert("Panel is closed");' onMinimize='alert("Panel is minimized");' apply="WEB.PizarraComposer">
+            
+             <panelchildren>
+            <columnlayout>
+                <columnchildren width="100%">
+                    <panel height="285px">
+                        <panelchildren>
+                            <borderlayout>
+                                <center flex="true" >
+                                    <div id="viewer" style="overflow:auto;" >
+                                        
+                                         <timer id="timerPizzara" delay="15000" repeats="true" />  
+                                        </div>
+                                </center>
+                                <south splittable="true" size="20%"  flex="true">
+                              <!--      <textbox id="text" multiline="true" width="98%"
+                                        style="margin:0px" value="Hi, I am Jumper." /> -->
+                                </south>
+                            </borderlayout>
+                        </panelchildren>
+                    </panel>
+                </columnchildren>
+ 
+            </columnlayout>
+        </panelchildren>
+            
+            </panel>
+</zk>

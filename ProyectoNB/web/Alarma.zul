@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <style>
+        .welcome {
+            color: #27AF15;
+            font-weight: bold;
+        }
+    </style>
+    <borderlayout  width="100%" height="100%">
+        <north border="none" size="16%" class="header"> <!--  splittable="true" collapsible="true" -->
+        <borderlayout>
+            <west size="70%" flex="true" maxsize="250"  collapsible="true">
+                <include src="header.zul"/>
+            </west>
+            <east size="30%" border="none" flex="true"  style="background-color: #2BB405">
+              <include src="Coneccion.zul" />
+              <!-- <label value="monitoreo de coneccion"
+                        style="color:gray;font-size:30px" /> -->
+            </east>
+            <south>                
+                <menubar id="menubar">
+                    <menu label="Inicio" src="/img/m1.gif" >
+                        <menupopup>
+                            <menuitem  label="Inicio" src="index.zul" onClick='Executions.sendRedirect("index.zul")'/>
+                            <menuseparator/>
+                            <menuitem label="Exit(Logout)"  src="login.zul" onClick='Executions.sendRedirect("login.zul")'/>
+                            
+	    		</menupopup>
+                    </menu>
+              <!--      <menu label="Ver datos" src="/img/m1.gif" >
+                        <menupopup>
+                            <menuitem src="/img/m1.gif" label="Micro" onClick="alert(self.label)"/>
+                            <menuseparator/>
+                            <menuitem label="Sensor" onClick="alert(self.label)"/>
+	    		</menupopup>
+                    </menu> -->
+                       
+                    <menu label="Alertas" src="/img/m1.gif" >
+                        <menupopup>
+                             <menuitem label="Alarmas" src="Alarma.zul" onClick='Executions.sendRedirect("Alarma.zul")'/>
+                            <menuseparator/>
+            		</menupopup>
+                    </menu>   
+                       
+                    <menu label="Administracion"   ><menupopup>
+                        <menuitem  label="Administracion" src="Admin.zul" onClick='Executions.sendRedirect("Admin.zul")'>
+                    </menuitem></menupopup>
+                    </menu>                            
+              </menubar>  
+            </south>
+        </borderlayout>      
+    </north>
+    <center border="0" >
+        <borderlayout>
+            <west maxsize="600" size="15%" flex="true" border="0" splittable="true">
+                <div style="background:#51C218">
+                    <!-- <label value="menu izq" 
+                        style="color:white;font-size:50px" /> -->
+                          
+                        <include src="/dynamic_treeEstacion.zul"/> 
+                        </div>
+            </west>
+            <center>
+                <tabbox>
+<tabs id="tabs">
+<tab label="Inicio" />
+
+</tabs>
+<tabpanels id="tabpanels">
+<tabpanel>
+<portallayout id="myptl" maximizedMode="whole" onPortalMove="saveStatus()"> <!-- onCreate="initStatus()"-->
+            <portalchildren style="padding: 5px" width="100%">
+            <panel sizable="true" id="Welcome" height="300px" title="Bienvenido" border="normal" collapsible="true" closable="true" maximizable="true" style="margin-bottom:10px">
+                <panelchildren>
+                   
+                    <zscript><![CDATA[
+        void move(Component dragged) {
+            if (self instanceof Listitem) {
+                Window win = new Window();
+                win.addForward(dragged, self, _applied);
+                self.parent.insertBefore(win, self);
+            } else {
+                self.appendChild(dragged);
+            }
+        }
+    ]]></zscript><label sclass="welcome">... </label>
+                               
+                </panelchildren>
+            </panel>
+        </portalchildren>
+        
+        </portallayout>    
+</tabpanel>
+</tabpanels>
+</tabbox>
+            
+                    
+                    
+                    
+                    
+            </center>
+            <east title="Menu Herramientas" size="30%" flex="true" collapsible="true">
+                <div style="background:#51C218;color:black;font-size:50px">
+                  <include src="/menuAlarm.zul"  />
+ 
+                </div>
+            </east>
+        </borderlayout>
+    </center>
+    
+    
+</borderlayout>    
+
+</zk>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<window id="window" title="ZK Flash Instrument" style="width:100%" border="normal"> 
+<zscript>
+int instrumentValue=0;
+int instrumentMax = 100;
+String showGlasBorder="false";
+
+public void changeValue(aValue) {
+     instrumentValue = aValue;
+     if (instrumentValue &lt; 0) instrumentValue = 0; 
+     if (instrumentValue &gt; 100) instrumentValue = 100; 
+     slider.setCurpos( instrumentValue );
+     drawGlas();
+     drawGauge();
+     drawFemale();
+     drawFace();
+}
+public void setInstrumentBorder() {
+     showGlasBorder= (instrumentCheckbox.isChecked()).toString();
+     drawGlas();
+}
+public drawGlas() {
+     String url = "Glas.swf?currentValue="+instrumentValue+"&amp;border="+showGlasBorder+"&amp;min=0&amp;lo=10&amp;li=20&amp;hi=80&amp;ho=90&amp;max=100"; 
+     myInstrument.src = url; 
+}
+public drawGauge() {
+     String url = "Gauge.swf?currentValue="+instrumentValue+"&amp;border="+showGlasBorder+"&amp;min=0&amp;lo=10&amp;li=20&amp;hi=80&amp;ho=90&amp;max=100"; 
+     myGauge.src = url; 
+}
+public drawFemale() {
+     String url = "FaceFemale.swf?currentValue="+instrumentValue+"&amp;border="+showGlasBorder+"&amp;min=0&amp;lo=10&amp;li=20&amp;hi=80&amp;ho=90&amp;max=100"; 
+     myFemale.src = url; 
+}
+public drawFace() {
+     String url = "Face.swf?currentValue="+instrumentValue+"&amp;border="+showGlasBorder+"&amp;min=0&amp;lo=10&amp;li=20&amp;hi=80&amp;ho=90&amp;max=100"; 
+     myFace.src = url; 
+}
+
+void zoom(Slider slider) {
+	changeValue( event.getPos() );
+}
+</zscript>
+
+<zscript zscript-language="javascript">
+public void  changetext() {
+      myGlas.setVariable( "Widget.setValue", "77");
+}
+</zscript>
+
+<hbox>
+<flash id="myInstrument" src="Glas.swf?currentValue=0&amp;min=0&amp;lo=10&amp;li=20&amp;hi=80&amp;ho=90&amp;max=100" width="128" height="128" /> 
+<flash id="myGauge" src="Gauge.swf?currentValue=0&amp;min=0&amp;lo=10&amp;li=20&amp;hi=80&amp;ho=90&amp;max=100" width="192" height="192" /> 
+<flash id="myFemale" src="FaceFemale.swf?currentValue=0&amp;min=0&amp;lo=10&amp;li=20&amp;hi=80&amp;ho=90&amp;max=100" width="192" height="192"   /> 
+<flash id="myFace" src="Face.swf?currentValue=0&amp;min=0&amp;lo=10&amp;li=20&amp;hi=80&amp;ho=90&amp;max=100" width="192" height="192"   /> 
+</hbox>
+<button label="change" onClick="changetext()"/>
+<button label="100" onClick="changeValue(100);"/>
+<button label="+3" onClick="changeValue(instrumentValue + 3);"/>
+<button label="-3" onClick="changeValue(instrumentValue - 3);"/>
+<button label="0" onClick="changeValue(0);"/>
+<vbox>
+<label value="Fill glas:"/>
+<slider id="slider" onScroll="zoom(slider)"/>
+<checkbox id="instrumentCheckbox" label="Show Borders on Glas" onCheck="setInstrumentBorder()" />
+</vbox>
+</window> 

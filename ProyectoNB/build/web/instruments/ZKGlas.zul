@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<hbox> 
+<flash id="myInstrument" src="Glas.swf?currentValue=49&amp;min=0&amp;lo=10&amp;li=20&amp;hi=80&amp;ho=90&amp;max=100" width="128" height="128" /> 
+</hbox>

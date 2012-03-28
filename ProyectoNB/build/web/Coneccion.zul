@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+
+<window id="win" apply="WEB.ConeccionComposer" width="75px">
+    
+<label id="alert1" visible="false" value=""/>
+<label id="alertaDesconeccion" visible="false"></label>
+ <image id="conIMG"  width="65px" visible="true" tooltiptext=""  />
+ 
+ 
+ <timer id="timerCon" delay="15000" repeats="true" />  
+</window>
+</zk>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://190.164.212.218:3306/monitoreo</property>
+    <property name="hibernate.connection.username">cris</property>
+    <property name="hibernate.connection.password">cris</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <mapping resource="Modelo/Micro.hbm.xml"/>
+    <mapping resource="Modelo/Alarma.hbm.xml"/>
+    <mapping resource="Modelo/TipoLogin.hbm.xml"/>
+    <mapping resource="Modelo/Login.hbm.xml"/>
+    <mapping resource="Modelo/Dato.hbm.xml"/>
+    <mapping resource="Modelo/Registro.hbm.xml"/>
+    <mapping resource="Modelo/TipoAlarma.hbm.xml"/>
+    <mapping resource="Modelo/Region.hbm.xml"/>
+    <mapping resource="Modelo/Estacion.hbm.xml"/>
+    <mapping resource="Modelo/Variable.hbm.xml"/>
+    <mapping resource="Modelo/RegistroAlarma.hbm.xml"/>
+    <mapping resource="Modelo/Provincia.hbm.xml"/>
+    <mapping resource="Modelo/Comuna.hbm.xml"/>
+    <mapping resource="Modelo/Sensor.hbm.xml"/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping resource="Modelo/DatoActual.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
