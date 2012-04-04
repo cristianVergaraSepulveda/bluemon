@@ -82,8 +82,8 @@ public class Administracion {
             Cambio.setVisible(false);
             edit.setLabel("editar");
             edit.setAttribute("ID", login.getIdLogin());
-                    
-            edit.setAction("onClick : getPopupNewUser();"); // <<  ---  linea critica info.doPopup();
+            
+          //  edit.setAction("onClick : getPopupNewUser();"); // <<  ---  linea critica info.doPopup();
                
                 
             row.appendChild(edit);
@@ -98,7 +98,9 @@ public class Administracion {
         wini.appendChild(grid);        
         Button testbot = new Button();
         testbot.setLabel("nuevo");
-        testbot.setAction(null);
+        testbot.setAction(null);                //agregar funcionabilidad nuevo usuario
+        
+        
         wini.appendChild(testbot);
     return wini;
     }
@@ -115,7 +117,7 @@ public class Administracion {
     
     public Window  getListVariable(){
         Window wini = new Window();
-         Sensor sen= new Sensor();
+        Sensor sen= new Sensor();
         Grid grid = new Grid();
         grid.setSizedByContent(true);
         grid.setSpan(true);
@@ -134,7 +136,7 @@ public class Administracion {
         columns.appendChild(column3);
         columns.appendChild(editar);
         
-        column.appendChild(new Label("Nombre VAr "));
+        column.appendChild(new Label("Nombre Variable "));
         column2.appendChild(new Label("Max"));
         column3.appendChild(new Label("Min")); 
         editar.appendChild(new Label("editar"));
@@ -171,12 +173,12 @@ public class Administracion {
               boolean update = admin.setUpdateSensor(idSensor, IbMax.getValue(), IbMin.getValue());
               Messagebox.show(aslo+String.valueOf(update));
 /* Messagebox.show("Are you sure to save?", "Confirm Dialog", Messagebox.OK | Messagebox.IGNORE  | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
-    public void onEvent(Event evt) throws InterruptedException {
-        if (evt.getName().equals("onOK")) {    alert("Data Saved !");
-        }else if (evt.getName().equals("onIgnore")) {
-            Messagebox.show("Ignore Save", "Warning", Messagebox.OK, Messagebox.EXCLAMATION);
-        }else{   alert("Save Canceled !");    }
-    }
+public void onEvent(Event evt) throws InterruptedException {
+    if (evt.getName().equals("onOK")) {    alert("Data Saved !");
+    }else if (evt.getName().equals("onIgnore")) {
+        Messagebox.show("Ignore Save", "Warning", Messagebox.OK, Messagebox.EXCLAMATION);
+    }else{   alert("Save Canceled !");    }
+}
 });*/
                 }
             });

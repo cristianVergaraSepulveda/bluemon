@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-04-2012 02:56:44 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="Modelo.Zenoss.History" table="history" catalog="events">
+        <id name="evid" type="string">
+            <column name="evid" length="36" />
+            <generator class="assigned" />
+        </id>
+        <property name="dedupid" type="string">
+            <column name="dedupid" not-null="true" />
+        </property>
+        <property name="device" type="string">
+            <column name="device" length="128" not-null="true" />
+        </property>
+        <property name="component" type="string">
+            <column name="component" />
+        </property>
+        <property name="eventClass" type="string">
+            <column name="eventClass" length="128" />
+        </property>
+        <property name="eventKey" type="string">
+            <column name="eventKey" length="128" />
+        </property>
+        <property name="summary" type="string">
+            <column name="summary" length="128" not-null="true" />
+        </property>
+        <property name="message" type="string">
+            <column name="message" length="4096" />
+        </property>
+        <property name="severity" type="java.lang.Short">
+            <column name="severity" />
+        </property>
+        <property name="eventState" type="java.lang.Short">
+            <column name="eventState" />
+        </property>
+        <property name="eventClassKey" type="string">
+            <column name="eventClassKey" length="128" />
+        </property>
+        <property name="eventGroup" type="string">
+            <column name="eventGroup" length="64" />
+        </property>
+        <property name="stateChange" type="timestamp">
+            <column name="stateChange" length="19" not-null="true" />
+        </property>
+        <property name="firstTime" type="java.lang.Double">
+            <column name="firstTime" precision="22" scale="0" />
+        </property>
+        <property name="lastTime" type="java.lang.Double">
+            <column name="lastTime" precision="22" scale="0" />
+        </property>
+        <property name="count" type="java.lang.Integer">
+            <column name="count" />
+        </property>
+        <property name="prodState" type="java.lang.Short">
+            <column name="prodState" />
+        </property>
+        <property name="suppid" type="string">
+            <column name="suppid" length="36" not-null="true" />
+        </property>
+        <property name="manager" type="string">
+            <column name="manager" length="128" not-null="true" />
+        </property>
+        <property name="agent" type="string">
+            <column name="agent" length="64" not-null="true" />
+        </property>
+        <property name="deviceClass" type="string">
+            <column name="DeviceClass" length="128" />
+        </property>
+        <property name="location" type="string">
+            <column name="Location" length="128" />
+        </property>
+        <property name="systems" type="string">
+            <column name="Systems" />
+        </property>
+        <property name="deviceGroups" type="string">
+            <column name="DeviceGroups" />
+        </property>
+        <property name="ipAddress" type="string">
+            <column name="ipAddress" length="15" />
+        </property>
+        <property name="facility" type="string">
+            <column name="facility" length="8" />
+        </property>
+        <property name="priority" type="java.lang.Short">
+            <column name="priority" />
+        </property>
+        <property name="ntevid" type="java.lang.Short">
+            <column name="ntevid" />
+        </property>
+        <property name="ownerid" type="string">
+            <column name="ownerid" length="32" />
+        </property>
+        <property name="deletedTime" type="timestamp">
+            <column name="deletedTime" length="19" not-null="true" />
+        </property>
+        <property name="clearid" type="string">
+            <column name="clearid" length="36" />
+        </property>
+        <property name="devicePriority" type="java.lang.Short">
+            <column name="DevicePriority" />
+        </property>
+        <property name="eventClassMapping" type="string">
+            <column name="eventClassMapping" length="128" />
+        </property>
+        <property name="monitor" type="string">
+            <column name="monitor" length="128" />
+        </property>
+    </class>
+</hibernate-mapping>

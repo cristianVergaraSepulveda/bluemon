@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="events"/>
+  <table-filter match-name="alert_state"/>
+  <table-filter match-name="history"/>
+  <table-filter match-name="heartbeat"/>
+  <table-filter match-name="detail"/>
+  <table-filter match-name="status"/>
+</hibernate-reverse-engineering>

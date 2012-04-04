@@ -20,8 +20,6 @@ import org.zkoss.zul.TreeitemRenderer;
 import org.zkoss.zul.Treerow;
 import org.zkoss.zul.Window;
 
-import WEB.TreeNode.ContactList;
-import WEB.TreeNode.ContactList2;
 
 import WEB.TreeNode.Contact;
 
@@ -34,7 +32,7 @@ public class DemoComposer extends GenericForwardComposer {
 		super.doAfterCompose(comp);
 		// tree.setTreeitemRenderer(new ContactTreeRenderer()); Before 5.0.6
 		tree.setItemRenderer(new ContactTreeRenderer());
-		contactTreeModel = new AdvancedTreeModel(new ContactList2().setContactList()); //error  ContactList().getRoot()
+		contactTreeModel = new AdvancedTreeModel(new ContactListEntel().setContactList()); //error  ContactList().getRoot()
 		tree.setModel(contactTreeModel);
                 
 	}
@@ -96,6 +94,8 @@ public class DemoComposer extends GenericForwardComposer {
                                 
                                 if(0<1){
                                     img.setSrc("/images/Ok.gif");
+                                }else{
+                                    img.setSrc("/images/KO.gif");
                                 }
                                 
 			} else { // Category Row

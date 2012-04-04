@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-04-2012 02:56:44 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="Modelo.Zenoss.AlertState" table="alert_state" catalog="events">
+        <composite-id name="id" class="Modelo.Zenoss.AlertStateId">
+            <key-property name="evid" type="string">
+                <column name="evid" length="36" />
+            </key-property>
+            <key-property name="userid" type="string">
+                <column name="userid" length="64" />
+            </key-property>
+            <key-property name="rule" type="string">
+                <column name="rule" />
+            </key-property>
+        </composite-id>
+        <property name="lastSent" type="timestamp">
+            <column name="lastSent" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

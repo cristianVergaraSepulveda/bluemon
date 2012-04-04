@@ -28,7 +28,7 @@ public class ConectaDB {
 	
 	 //SQLMYSQL
 	private String	driver= "com.mysql.jdbc.Driver";
-	private String 	url= "jdbc:mysql://190.164.212.218:3306/monitoreo";       //192.168.150.224
+	private String 	url= "jdbc:mysql://190.164.211.99:3306/monitoreo";       //192.168.150.224
 	private String 	login= "cris";
 	private String 	password= "cris";
 	

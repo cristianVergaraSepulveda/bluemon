@@ -237,8 +237,6 @@ Copyright (C) 2004 Potix Corporation. All Rights Reserved.
     </mime-mapping>
     <welcome-file-list>
         <welcome-file>login.zul</welcome-file>
-        <welcome-file>login.zhtml</welcome-file>
         <welcome-file>login.html</welcome-file>
-        <welcome-file>login.htm</welcome-file>
     </welcome-file-list>
 </web-app>

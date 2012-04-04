@@ -44,36 +44,35 @@ alert(" Opcion aun no Implementada");
 if(ra2.isChecked()){
 //alert("opcion Adminsitracion vriables ");
 
-Tab tab = new Tab(txb.getValue());
-tab.setClosable(true);
-tabs.appendChild(tab);
-Tabpanel tabpanel = new Tabpanel();
-tabpanel.appendChild(new Label("Administracion variable "));
-// insertar win con codigo
-Administracion adm = new Administracion();
+    Tab tab = new Tab(txb.getValue());
+    tab.setClosable(true);
+    tabs.appendChild(tab);
+    Tabpanel tabpanel = new Tabpanel();
+    tabpanel.appendChild(new Label("Administracion variable "));
+    // insertar win con codigo
+    Administracion adm = new Administracion();
 
-Window twin = new Window();
-//twin.appendChild(new Label("la cosa nostra2"));
-twin = adm.getListVariable();
-tabpanel.appendChild(twin);
+    Window twin = new Window();
+    //twin.appendChild(new Label("la cosa nostra2"));
+    twin = adm.getListVariable();
+    tabpanel.appendChild(twin);
 
-tabpanels.appendChild(tabpanel);
+    tabpanels.appendChild(tabpanel);
 }
-
 if(ra1.isChecked()){
-Tab tab = new Tab(txb.getValue());
-tab.setClosable(true);
-tabs.appendChild(tab);
-Tabpanel tabpanel = new Tabpanel();
-tabpanel.appendChild(new Label("solo label "));
+    Tab tab = new Tab(txb.getValue());
+    tab.setClosable(true);
+    tabs.appendChild(tab);
+    Tabpanel tabpanel = new Tabpanel();
+    tabpanel.appendChild(new Label("solo label "));
 
-Administracion adm = new Administracion();
+    Administracion adm = new Administracion();
 
-Window twin = new Window();
-//twin.appendChild(new Label("la cosa nostra2"));
-twin = adm.getListUser();
-tabpanel.appendChild(twin);
-tabpanels.appendChild(tabpanel);
+    Window twin = new Window();
+    //twin.appendChild(new Label("la cosa nostra2"));
+    twin = adm.getListUser();
+    tabpanel.appendChild(twin);
+    tabpanels.appendChild(tabpanel);
 
 }
 

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-04-2012 02:56:44 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="Modelo.Zenoss.Detail" table="detail" catalog="events">
+        <composite-id name="id" class="Modelo.Zenoss.DetailId">
+            <key-property name="evid" type="string">
+                <column name="evid" length="36" />
+            </key-property>
+            <key-property name="name" type="string">
+                <column name="name" />
+            </key-property>
+        </composite-id>
+        <property name="sequence" type="java.lang.Integer">
+            <column name="sequence" />
+        </property>
+        <property name="value" type="string">
+            <column name="value" />
+        </property>
+    </class>
+</hibernate-mapping>

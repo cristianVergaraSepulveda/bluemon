@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-04-2012 02:56:44 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="Modelo.Zenoss.Heartbeat" table="heartbeat" catalog="events">
+        <composite-id name="id" class="Modelo.Zenoss.HeartbeatId">
+            <key-property name="device" type="string">
+                <column name="device" length="128" />
+            </key-property>
+            <key-property name="component" type="string">
+                <column name="component" length="128" />
+            </key-property>
+        </composite-id>
+        <property name="timeout" type="java.lang.Integer">
+            <column name="timeout" />
+        </property>
+        <property name="lastTime" type="timestamp">
+            <column name="lastTime" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

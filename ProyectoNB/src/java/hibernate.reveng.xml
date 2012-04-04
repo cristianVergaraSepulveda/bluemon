@@ -2,19 +2,19 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="monitoreo"/>
-  <table-filter match-name="ALARMA"/>
-  <table-filter match-name="DATO"/>
-  <table-filter match-name="VARIABLE"/>
-  <table-filter match-name="REGISTRO_ALARMA"/>
+  <table-filter match-name="ESTACION"/>
+  <table-filter match-name="MICRO"/>
+  <table-filter match-name="TIPO_ALARMA"/>
+  <table-filter match-name="region"/>
   <table-filter match-name="DATO_ACTUAL"/>
   <table-filter match-name="TIPO_LOGIN"/>
-  <table-filter match-name="TIPO_ALARMA"/>
-  <table-filter match-name="ESTACION"/>
-  <table-filter match-name="REGISTRO"/>
-  <table-filter match-name="LOGIN"/>
-  <table-filter match-name="MICRO"/>
-  <table-filter match-name="comuna"/>
+  <table-filter match-name="DATO"/>
   <table-filter match-name="provincia"/>
+  <table-filter match-name="comuna"/>
+  <table-filter match-name="REGISTRO_ALARMA"/>
+  <table-filter match-name="REGISTRO"/>
+  <table-filter match-name="VARIABLE"/>
+  <table-filter match-name="LOGIN"/>
+  <table-filter match-name="ALARMA"/>
   <table-filter match-name="SENSOR"/>
-  <table-filter match-name="region"/>
 </hibernate-reverse-engineering>
