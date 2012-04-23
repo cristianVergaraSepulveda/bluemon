@@ -31,7 +31,7 @@ public class GridComposer extends GenericForwardComposer {
     public int cn=0;
     public void doAfterCompose(Component comp) throws Exception {
     super.doAfterCompose(comp);
-    datos.setModel(new ListModelList(getUpdatedData()));
+    //datos.setModel(new ListModelList(getUpdatedData()));
 
   }
    public void onTimer$timer(Event e){

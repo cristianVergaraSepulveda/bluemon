@@ -12,7 +12,7 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Separator;
-import org.zkoss.zul.Textbox;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.

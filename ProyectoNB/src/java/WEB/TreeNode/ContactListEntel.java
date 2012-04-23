@@ -29,15 +29,7 @@ public class ContactListEntel {
         
     public ContactTreeNode getRoot() {
 		return root;
-	}
-    
-    
-    
-    
-    
-    
-    
-    
+	}    
     
    //################################################### 
     public ContactTreeNode CrearMicro(int IdMicro){

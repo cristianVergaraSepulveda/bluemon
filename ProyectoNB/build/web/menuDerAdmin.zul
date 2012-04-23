@@ -38,12 +38,27 @@ tabpanels.appendChild(tabpanel);
 void add() {
 
 if(ra3.checked == true){
-alert(" Opcion aun no Implementada");
+//alert(" Opcion aun no Implementada");
 
+    Tab tab3 = new Tab(txb.getValue());
+    
+    tab3.setClosable(true);
+  //tab3.setId(tab33);
+   /* if(){
+    alert("tab ya existe");
+    }*/
+    tabs.appendChild(tab3);
+    Tabpanel tabpanel3 = new Tabpanel();
+    tabpanel3.appendChild(new Label("Administracion Estaciones"));
+    // insertar win con codigo
+    Administracion adm = new Administracion();
+    Window twin = new Window();    
+    twin = adm.getListEstaciones();
+    tabpanel3.appendChild(twin);
+    tabpanels.appendChild(tabpanel3);
+    
 }
 if(ra2.isChecked()){
-//alert("opcion Adminsitracion vriables ");
-
     Tab tab = new Tab(txb.getValue());
     tab.setClosable(true);
     tabs.appendChild(tab);
@@ -53,7 +68,6 @@ if(ra2.isChecked()){
     Administracion adm = new Administracion();
 
     Window twin = new Window();
-    //twin.appendChild(new Label("la cosa nostra2"));
     twin = adm.getListVariable();
     tabpanel.appendChild(twin);
 
@@ -64,22 +78,18 @@ if(ra1.isChecked()){
     tab.setClosable(true);
     tabs.appendChild(tab);
     Tabpanel tabpanel = new Tabpanel();
-    tabpanel.appendChild(new Label("solo label "));
+    tabpanel.appendChild(new Label("Administrar Usuario"));
 
     Administracion adm = new Administracion();
 
     Window twin = new Window();
-    //twin.appendChild(new Label("la cosa nostra2"));
     twin = adm.getListUser();
     tabpanel.appendChild(twin);
     tabpanels.appendChild(tabpanel);
-
 }
-
 
 }
 ]]></zscript>
-    <label value="menu para crear reportes y  visualizar a traves de tabs que se desplegaran
-  en la pantalla de en medio" style="color:#FF0000; font-size:20px" />
+    <label value="" style="color:#FF0000; font-size:20px" />
    <include src="pizarraAlarm.zul"/>
 </zk>

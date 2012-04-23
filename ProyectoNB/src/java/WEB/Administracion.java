@@ -5,6 +5,7 @@
 package WEB;
 
 import DAO.AdminDAO;
+import DAO.EstacionDAO;
 import Modelo.Login;
 import Modelo.Sensor;
 import org.zkoss.zul.Label;
@@ -18,18 +19,22 @@ import org.zkoss.zul.Grid;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Rows;
 import DAO.LoginDAO;
+import Modelo.TipoLogin;
 import java.sql.SQLException;
-import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 /**
  *
  * @author athanatos
  */
-public class Administracion {
+public class Administracion extends GenericForwardComposer{
     
     private Window win;
    
@@ -41,7 +46,8 @@ public class Administracion {
     }
     
     public Window getListUser(){
-        Window wini = new Window();
+        final Window wini = new Window();
+        
         Grid grid = new Grid();
         Columns columns = new Columns();
         columns.setId("columna");
@@ -81,16 +87,14 @@ public class Administracion {
             Cambio.setLabel("Aplicar");
             Cambio.setVisible(false);
             edit.setLabel("editar");
+            
+            edit.setId("edit");
+          
             edit.setAttribute("ID", login.getIdLogin());
             
-          //  edit.setAction("onClick : getPopupNewUser();"); // <<  ---  linea critica info.doPopup();
-               
-                
+            
+          //  edit.setAction("onClick : getPopupNewUser();"); // <<  ---  linea critica info.doPopup();               
             row.appendChild(edit);
-           // row.appendChild(Cambio);
-            //edit.setAction("onClick : setCrearUser() ");
-             // WORKS!!  btnTest.setAction("onClick : alert(self.label) ");
-              //edit.setParent(setCrearUser()); //setPopup(setCrearUser());
         }              
         grid.appendChild(rows1);
         
@@ -98,22 +102,105 @@ public class Administracion {
         wini.appendChild(grid);        
         Button testbot = new Button();
         testbot.setLabel("nuevo");
-        testbot.setAction(null);                //agregar funcionabilidad nuevo usuario
-        
-        
-        wini.appendChild(testbot);
+        //testbot.setAttribute("onClick", getPopupNewUser());
+        testbot.addEventListener("onClick",new EventListener(){
+            public void onEvent(Event event) throws Exception {
+               // ventana emergente
+               final Window test = new Window();// pasarlo al metodo getPopupNewUser
+               test.setVisible(true);
+               test.setTitle("Nuevo Usuario");
+               test.setClosable(true);              
+              try { test.setMode("overlapped"); } catch (Exception e) {/*IGNORE EXCEPTION*/}
+              /* agregar lsitbox para la cosa */
+              Listbox asd = new Listbox();              
+              asd.setParent(test);
+              Listitem asd1 = new Listitem();
+              asd1.setParent(asd);
+              Listcell cel1 = new Listcell();
+              cel1.setLabel("Login");
+              final Listcell cel11 = new Listcell();
+              final Textbox Login = new Textbox();
+              cel11.appendChild(Login);              
+              Listitem asd2 = new Listitem();
+               asd2.setParent(asd);
+              Listcell cell2 = new Listcell();              
+              final Textbox password = new Textbox();
+              cell2.setLabel("Passwords");
+              final Listcell cell22 = new Listcell();      
+              cell22.appendChild(password);
+              Listitem asd3 = new Listitem();
+              asd3.setParent(asd);
+              Listcell cell3 = new Listcell(); 
+              cell3.setLabel("Tipo Usuario:");
+              final Listcell cell33 = new Listcell(); 
+              final Listbox select = new Listbox();
+                select.setMold("select");
+                select.setId("Esta");
+                select.setRows(1);
+                List allTipo = new LoginDAO().getListTipoLogin();
+                for(int i=0;i<allTipo.size(); i++){
+                   Listitem TipoLog = new Listitem();
+                   TipoLogin TLog = new TipoLogin();
+                    TLog = (TipoLogin) allTipo.get(i);           
+                   TipoLog.setLabel(TLog.getNombreTipo());
+                   TipoLog.setValue(TLog.getIdTipoLogin());
+                   TipoLog.setParent(select);
+                }
+                cell33.appendChild(select);
+              //----------------------------
+              Listitem asd4 = new Listitem();
+               asd4.setParent(asd);
+              Listcell cell4 = new Listcell();              
+              Button ok = new Button();
+              ok.setLabel("OK");  
+              ok.addEventListener("onClick", new EventListener() {
+           		 public void onEvent(Event event) throws Exception {
+                              Messagebox.show("Se creara un nuevo usuario ,esta Seguro que quiere salvar?", "Confirm Dialog", Messagebox.OK | Messagebox.IGNORE  | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+    public void onEvent(Event evt) throws InterruptedException {
+        if (evt.getName().equals("onOK")) {
+            //alert("Data Saved !");
+              int ak= Integer.parseInt((String) select.getSelectedItem().getValue());
+           TipoLogin Ltipo = new LoginDAO().getTipoLoginxIDTipo(ak);
+            LoginDAO insert = new LoginDAO();
+            
+            insert.CreateandStoreLogin(Ltipo, (String) Login.getValue(), (String) password.getValue());                       
+            Messagebox.show("Datos salvados");            
+            test.onClose();
+            
+        } else if (evt.getName().equals("onIgnore")) {
+            Messagebox.show("Datos Ignorados", "Warning", Messagebox.OK, Messagebox.EXCLAMATION);
+             Login.setValue(null);
+             password.setValue(null);
+             
+        } else {
+            //alert("Save Canceled !");
+            Messagebox.show("Save Canceled !");
+            test.isClosable();
+        }
+    }
+});
+         	   }
+      	  });		
+              ok.setParent(cell4);              
+              cel1.setParent(asd1);
+              cel11.setParent(asd1);
+              cell2.setParent(asd2);
+              cell22.setParent(asd2);
+              cell3.setParent(asd3);
+              cell33.setParent(asd3);
+              cell4.setParent(asd4);              
+              //fin contenido test                            
+              test.isClosable();
+              test.setParent(wini);
+              test.setWidth("290px");
+              test.setHeight("170px");
+              test.setPosition("center");
+               //fin
+            }
+        });
+    wini.appendChild(testbot);
     return wini;
-    }
-    
-    public Window getPopupNewUser(){
-        Window info = new Window();
-        info.appendChild(new Label("Crear Usuario"));
-        info.setVisible(true);
-        info.setWidth("120px");
-       // info.setPosition("parent");
-        info.doHighlighted();
-        return info;        
-    }
+    }//fin admin usuario
     
     public Window  getListVariable(){
         Window wini = new Window();
@@ -172,14 +259,6 @@ public class Administracion {
                     String aslo = "Update:";
               boolean update = admin.setUpdateSensor(idSensor, IbMax.getValue(), IbMin.getValue());
               Messagebox.show(aslo+String.valueOf(update));
-/* Messagebox.show("Are you sure to save?", "Confirm Dialog", Messagebox.OK | Messagebox.IGNORE  | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
-public void onEvent(Event evt) throws InterruptedException {
-    if (evt.getName().equals("onOK")) {    alert("Data Saved !");
-    }else if (evt.getName().equals("onIgnore")) {
-        Messagebox.show("Ignore Save", "Warning", Messagebox.OK, Messagebox.EXCLAMATION);
-    }else{   alert("Save Canceled !");    }
-}
-});*/
                 }
             });
             //edit.setAction("onclick: alert('mensaje alert')");
@@ -192,17 +271,19 @@ public void onEvent(Event evt) throws InterruptedException {
         wini.appendChild(grid);
         return wini;
     
-    }
-    public Window setCrearUser() throws InterruptedException{
-    Window wini = new Window();
-        wini.appendChild(new Label("Crear Usuario"));
-        wini.setMode("overlapped");
-        //wini.doOverlapped();
-    return wini;
+    }//fin administrar variables
+   
+    
+    public void onClick$edit() throws InterruptedException{
+        Messagebox.show("Edit box");
     }
     
-    public void onClick$edit(Event e) throws Exception, SQLException {
-       
-    }
+    
+    public Window getListEstaciones(){
+    Window winix = new Window();
+    
+    return winix;        
+    }//fin administrar estaciones
     
 }
+
