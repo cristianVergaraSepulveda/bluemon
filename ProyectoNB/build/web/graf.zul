@@ -1,0 +1,12 @@
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+
+<window>
+   <iframe src="http://localhost/WebServ/otro.htm" height="300px" width="410px">
+               </iframe>
+       <!--  <iframe src="grafico/test.htm" ></iframe>      -->
+               
+               </window>
+assddsadadsads
+
+</zk>
