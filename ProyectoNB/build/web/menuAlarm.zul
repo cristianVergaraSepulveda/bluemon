@@ -13,7 +13,7 @@
             <radio id="ra1" name="ra1" label="alarma tipo1" radiogroup="sv1" />
         </row>
         <row>
-             <radio id="ra2" label="Aarma tipo 2 " radiogroup="sv1" />
+             <radio id="ra2" label="Alarma tipo 2 " radiogroup="sv1" />
         </row>
         <row>
              <radio id="ra3" label="Alarma tipo 3" radiogroup="sv1" />
@@ -59,7 +59,6 @@ void add() {
         //Administracion adm = new Administracion();
 
     Window twin = new Window();
-        //twin.appendChild(new Label("la cosa nostra2"));
         //twin = adm.getListUser();
     tabpanel.appendChild(twin);
     tabpanels.appendChild(tabpanel);

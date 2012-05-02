@@ -20,7 +20,6 @@ public class AlarmaDAO {
     this.session = zenossHibernateUtil.getSessionFactory().getCurrentSession();
     }
     
-    
     public List getHistory(int id){
     List<History> ListHistory =null;
     

@@ -98,6 +98,16 @@ public class Reportes {
             Button GeneraReport = new Button();
             GeneraReport.setLabel("Generar Reporte");
             cell2.appendChild(GeneraReport);
+            GeneraReport.addEventListener("onClick", new EventListener() {
+           		 public void onEvent(Event event) throws Exception {
+              
+                             //crear iframe  y llamar a report.zul
+                             
+                             //pasar los parametros estacion, micro , sensor, frchas 
+         	   }
+      	  });
+            
+            
         }
    });
     //agregado

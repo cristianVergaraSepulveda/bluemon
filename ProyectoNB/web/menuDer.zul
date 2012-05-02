@@ -3,13 +3,7 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
 <vbox>
 <button label="Graficos" onClick="add1()" onCheck="txb.value = self.selectedItem.label" >
-    <!-- <tab label="Tab 1" closable="true" /> -->
- <!--   <attribute value=" agragar tabs" name="onClick"><![CDATA[
-       tabs.appendChild(new Tab("tab 2"));
-Tabpanel tabpanel = new Tabpanel();
-tabpanel.appendChild(new Label("new tabs"));
-tabpanels.appendChild(tabpanel);
-    ]]></attribute> -->
+    
     </button>
     <button label="Reportes" onClick="add2()" onCheck="txb.value = self.selectedItem.label" ></button>
     <button label="Otros" onClick="add3()" ></button>
@@ -60,5 +54,5 @@ tabpanels.appendChild(tabpanel);
 }
 ]]></zscript>
     <label value="  " style="color:#FF0000; font-size:20px" />
-    <include src="pizarraAlarm.zul"/>
-</zk>
+   <!-- <include src="pizarraAlarm.zul"/> -->
+ </zk>
